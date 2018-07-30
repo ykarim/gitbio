@@ -19,7 +19,7 @@ class App extends Component {
             const userBioData = await this.getUserBioInfo(username);
             const userRepoData = await this.getUserRepoInfo(username);
 
-            if (userBioData.id) {
+            if (userBioData.username) {
                 this.setState({
                     user: userBioData,
                     repos: userRepoData,
