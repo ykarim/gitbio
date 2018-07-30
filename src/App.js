@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Titles from "./components/Titles";
 import Form from "./components/Form";
 import Profile from "./components/Profile";
 
@@ -17,9 +16,9 @@ class App extends Component {
         const username = e.target.elements.username.value;
         if (username) {
             const userBioData = await this.getUserBioInfo(username);
-            const userRepoData = await this.getUserRepoInfo(username);
-
             if (userBioData.username) {
+                const userRepoData = await this.getUserRepoInfo(username);
+
                 this.setState({
                     user: userBioData,
                     repos: userRepoData,
@@ -30,7 +29,7 @@ class App extends Component {
                 this.setState({
                     user: undefined,
                     repos: undefined,
-                    error: "User not found"
+                    error: userBioData.error
                 });
             }
         } else {
@@ -46,19 +45,26 @@ class App extends Component {
         const api_call = await fetch(`https://api.github.com/users/${username}`);
         const data = await api_call.json();
 
-        return {
-            username: data.login,
-            avatar: data.avatar_url,
-            url: data.html_url,
-            name: data.name,
-            bio: data.bio,
-            type: data.type,
-            repo_count: data.public_repos,
-            followers: data.followers,
-            following: data.following,
-            created: data.created_at,
-            updated: data.updated_at,
-        };
+        if (data.id) {
+
+            return {
+                avatar: data.avatar_url,
+                name: data.name,
+                username: data.login,
+                url: data.html_url,
+                bio: data.bio,
+                type: data.type,
+                repo_count: data.public_repos,
+                followers: data.followers,
+                following: data.following,
+                created: new Date(data.created_at).toLocaleString(),
+                updated: new Date(data.updated_at).toLocaleString(),
+            };
+        } else {
+            return {
+                error: data.message
+            }
+        }
     }
 
     getUserRepoInfo = async (username) => {
@@ -86,10 +92,17 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <Titles />
-                <Form getUserData={this.getUserData}/>
-                <Profile user={this.state.user} repos={this.state.repos}/>
+            <div className="wrapper">
+                <nav className="navbar navbar-expand-sm navbar-light bg-light">
+                    <a className="navbar-brand">GitBio</a>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav ml-auto">
+                            <Form getUserData={this.getUserData}/>
+                        </ul>
+                    </div>
+                </nav>
+
+                <Profile user={this.state.user} repos={this.state.repos} error={this.state.error}/>
             </div>
         );
     }

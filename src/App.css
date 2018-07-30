@@ -1,0 +1,33 @@
+.wrapper {
+
+}
+
+.container {
+    background: azure;
+
+    border-radius: 25px;
+    margin-top: 25px;
+    padding: 10px;
+}
+
+.container > .row > .col-sm-12 {
+    margin: auto;
+    text-align: center;
+}
+
+.profileImg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+
+    height: 150px;
+    width: 150px;
+}
+
+.numericalData {
+    padding: 20px;
+
+    margin: auto;
+    text-align: center;
+}
