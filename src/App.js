@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Titles from "./components/Titles";
 import Form from "./components/Form";
 import Profile from "./components/Profile";
 
@@ -86,6 +87,7 @@ class App extends Component {
     render() {
         return (
             <div>
+                <Titles />
                 <Form getUserData={this.getUserData}/>
                 <Profile user={this.state.user} repos={this.state.repos}/>
             </div>
