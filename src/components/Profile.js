@@ -1,4 +1,5 @@
 import React from "react";
+import Repos from "./Repos";
 
 class Profile extends React.Component {
 
@@ -59,6 +60,10 @@ class Profile extends React.Component {
                             <p className="caption">Updated On</p>
                         </div>
                     </div>
+                }
+
+                { this.props.repos &&
+                    <Repos repos={this.props.repos}/>
                 }
             </div>
         );

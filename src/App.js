@@ -83,7 +83,8 @@ class App extends Component {
                 language: element.language,
                 forks: element.forks_count,
                 open_issues: element.open_issues_count,
-                watchers: element.watchers
+                stars: element.stargazers_count,
+                watchers: element.watchers_count
             });
         });
 
