@@ -11,7 +11,7 @@ class Repos extends React.Component {
 
     render () {
         const RepoDivs = this.props.repos.map((element, key) =>
-            <div className="repoElement">
+            <div className="repoElement" key={key}>
                 <div className="row">
                     <div className="col-sm-12">
                         <a href={element.url}>{element.name}</a>
