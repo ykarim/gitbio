@@ -18,9 +18,7 @@ class App extends Component {
             const userBioData = await this.getUserBioInfo(username);
             if (userBioData.username) {
                 const userRepoData = await this.getUserRepoInfo(username);
-                const userRepoLanguageStats = this.analyzeRepoLanguage(userRepoData);
-
-                console.log(userRepoLanguageStats);
+                const userRepoLanguageStats = this.analyzeUserLanguages(userRepoData);
 
                 this.setState({
                     user: userBioData,
@@ -81,9 +79,10 @@ class App extends Component {
                 name: element.name,
                 url: element.html_url,
                 description: element.description,
-                created: element.created_at,
-                pushed: element.pushed_at,
+                created: new Date(element.created_at).toLocaleString(),
+                pushed: new Date(element.pushed_at).toLocaleString(),
                 language: element.language,
+                languages_url: element.languages_url,
                 forks: element.forks_count,
                 open_issues: element.open_issues_count,
                 stars: element.stargazers_count,
@@ -94,7 +93,13 @@ class App extends Component {
         return repos;
     }
 
-    analyzeRepoLanguage = (userRepoData) => {
+    analyzeRepoLanguages = (userRepoData) => {
+        userRepoData.forEach(function(repo) {
+
+        });
+    }
+
+    analyzeUserLanguages = (userRepoData) => {
         var languageFrequencies = new Map();
 
         userRepoData.forEach(function(repo) {

@@ -9,9 +9,33 @@ library.add(faCodeBranch);
 
 class Repos extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        const repoStates = [];
+        for (let i = 0; i < props.repos.length; i++) {
+            repoStates.push(false);
+        }
+
+        this.state = {
+            repoDetailsShown: repoStates,
+        }
+
+        this.toggleRepoDetails = this.toggleRepoDetails.bind(this);
+    }
+
+    toggleRepoDetails(repoKey) {
+        var currentRepoStates = this.state.repoDetailsShown;
+        currentRepoStates[repoKey] = !currentRepoStates[repoKey];
+
+        this.setState({
+            repoDetailsShown: currentRepoStates,
+        });
+    }
+
     render () {
         const RepoDivs = this.props.repos.map((element, key) =>
-            <div className="repoElement" key={key}>
+            <div className="repoElement" key={key} onClick={() => this.toggleRepoDetails(key)}>
                 <div className="row">
                     <div className="col-sm-12">
                         <a href={element.url}>{element.name}</a>
@@ -33,6 +57,24 @@ class Repos extends React.Component {
                         <h6>Forks: {element.forks} <FontAwesomeIcon icon="code-branch"/></h6>
                     </div>
                 </div>
+
+                { this.state.repoDetailsShown[key] &&
+                    <div>
+                        <div className="row repoStats">
+                            <div className="col-sm-6">
+                                <h4>{element.created}</h4>
+                                <p>Created On</p>
+                            </div>
+                            <div className="col-sm-6">
+                                <h4>{element.pushed}</h4>
+                                <p>Last Updated On</p>
+                            </div>
+                        </div>
+                        <div className="row">
+
+                        </div>
+                    </div>
+                }
             </div>
         );
 
