@@ -27,6 +27,7 @@ class Profile extends React.Component {
                         ) : (
                             <div>
                                 <h1>Welcome to GitBio!</h1>
+                                <p>Get detailed GitHub user information, statistics, and more...</p>
                             </div>
                         )}
                     </div>
