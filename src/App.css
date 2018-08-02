@@ -54,3 +54,39 @@
     margin: auto;
     text-align: center;
 }
+
+.starIcon {
+    color: #ffce0a;
+}
+
+.eyeIcon {
+    color: #e83912;
+}
+
+.languageList {
+    list-style: none;
+}
+
+.languageList > li {
+    font-size: 20px;
+}
+
+.languageListHeader {
+    font-size: 20px;
+}
+
+.languageListItem::before {
+    content: "•";
+    color: #e83912;
+
+    display: inline-block;
+    width: 1em;
+}
+
+.languageListItem:nth-child(3n+2):before {
+    color: #ffce0a;
+}
+
+.languageListItem:nth-child(3n+3):before {
+    color: #12600b;
+}

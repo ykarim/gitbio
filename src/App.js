@@ -17,8 +17,8 @@ class App extends Component {
         if (username) {
             const userBioData = await this.getUserBioInfo(username);
             if (userBioData.username) {
-                const userRepoData = await this.getUserRepoInfo(username);
-                const userRepoLanguageStats = this.analyzeUserLanguages(userRepoData);
+                let userRepoData = await this.getUserRepoInfo(username);
+                // const userRepoLanguageStats = this.analyzeUserLanguages(userRepoData);
 
                 this.setState({
                     user: userBioData,
@@ -90,13 +90,33 @@ class App extends Component {
             });
         });
 
+        this.analyzeRepoLanguages(repos);
         return repos;
     }
 
     analyzeRepoLanguages = (userRepoData) => {
-        userRepoData.forEach(function(repo) {
+        userRepoData.forEach(async function(repo) {
+            const api_call = await fetch(repo.languages_url);
+            const languageData = await api_call.json();
+            const languageMap = new Map();
+            let totalLines = 0;
 
+            //Obtain total number of lines
+            for (let language in languageData) {
+                if (languageData.hasOwnProperty(language)) {
+                    languageMap.set(language, languageData[language]);
+                    totalLines += languageData[language];
+                }
+            }
+
+            //Set value of language in languageMap equal to string containing percentage rounded to two decimals
+            languageMap.forEach(function(value, key) {
+                languageMap.set(key, (value / totalLines * 100).toFixed(2) + "%");
+            });
+            repo.language_breakdown = languageMap;
         });
+
+        return userRepoData;
     }
 
     analyzeUserLanguages = (userRepoData) => {
