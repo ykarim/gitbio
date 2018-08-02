@@ -1,4 +1,5 @@
 import React from "react";
+import "../css/Profile.css"
 import Repos from "./Repos";
 
 class Profile extends React.Component {

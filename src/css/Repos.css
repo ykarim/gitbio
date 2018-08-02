@@ -1,0 +1,56 @@
+.repoElement {
+    background-color: white;
+
+    border-radius: 25px;
+    margin: 25px;
+    padding: 10px 10px 25px 25px;
+
+    box-shadow: 0px 13px 40px -13px rgba(0,0,0,0.75);
+
+    cursor: pointer;
+}
+
+.repoElement > .row > .col-sm-12 > a {
+    font-size: 24px;
+}
+
+.repoStats {
+    margin: auto;
+    text-align: center;
+}
+
+.starIcon {
+    color: #ffce0a;
+}
+
+.eyeIcon {
+    color: #e83912;
+}
+
+.languageList {
+    list-style: none;
+}
+
+.languageList > li {
+    font-size: 20px;
+}
+
+.languageListHeader {
+    font-size: 20px;
+}
+
+.languageListItem::before {
+    content: "•";
+    color: #e83912;
+
+    display: inline-block;
+    width: 1em;
+}
+
+.languageListItem:nth-child(3n+2):before {
+    color: #ffce0a;
+}
+
+.languageListItem:nth-child(3n+3):before {
+    color: #12600b;
+}
