@@ -38,8 +38,9 @@ class Repos extends React.Component {
         return <ul className="list-inline languageList">{languageItems}</ul>;
     }
 
-    toggleRepoDetails(repoKey) {
-        var currentRepoStates = this.state.repoDetailsShown;
+    toggleRepoDetails(e) {
+        let repoKey = e.target.dataset.repoKey;
+        let currentRepoStates = this.state.repoDetailsShown;
         currentRepoStates[repoKey] = !currentRepoStates[repoKey];
 
         this.setState({
@@ -49,7 +50,7 @@ class Repos extends React.Component {
 
     render () {
         const RepoDivs = this.props.repos.map((element, key) =>
-            <div className="repoElement" key={key} onClick={() => this.toggleRepoDetails(key)}>
+            <div className="repoElement" key={key} data-repoKey={key} onClick={this.toggleRepoDetails}>
                 <div className="row">
                     <div className="col-sm-12">
                         <a href={element.url}>{element.name}</a>
