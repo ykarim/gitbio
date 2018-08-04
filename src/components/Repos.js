@@ -38,8 +38,7 @@ class Repos extends React.Component {
         return <ul className="list-inline languageList">{languageItems}</ul>;
     }
 
-    toggleRepoDetails(e) {
-        let repoKey = e.target.dataset.repoKey;
+    toggleRepoDetails(repoKey) {
         let currentRepoStates = this.state.repoDetailsShown;
         currentRepoStates[repoKey] = !currentRepoStates[repoKey];
 
@@ -49,47 +48,47 @@ class Repos extends React.Component {
     }
 
     render () {
-        const RepoDivs = this.props.repos.map((element, key) =>
-            <div className="repoElement" key={key} data-repoKey={key} onClick={this.toggleRepoDetails}>
+        const RepoDivs = this.props.repos.map((repo, repoKey) =>
+            <div className="repoElement" key={repoKey} data-repokey={repoKey} onClick={() => this.toggleRepoDetails(repoKey)}>
                 <div className="row">
                     <div className="col-sm-12">
-                        <a href={element.url}>{element.name}</a>
+                        <a href={repo.url}>{repo.name}</a>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-sm-12">
-                        <p>{element.description}</p>
+                        <p>{repo.description}</p>
                     </div>
                 </div>
                 <div className="row repoStats">
                     <div className="col-sm-4">
-                        <h5>Stars: {element.stars} <FontAwesomeIcon icon="star" className="starIcon"/></h5>
+                        <h5>Stars: {repo.stars} <FontAwesomeIcon icon="star" className="starIcon"/></h5>
                     </div>
                     <div className="col-sm-4">
-                        <h5>Watchers: {element.watchers} <FontAwesomeIcon icon="eye" className="eyeIcon"/></h5>
+                        <h5>Watchers: {repo.watchers} <FontAwesomeIcon icon="eye" className="eyeIcon"/></h5>
                     </div>
                     <div className="col-sm-4">
-                        <h5>Forks: {element.forks} <FontAwesomeIcon icon="code-branch" className="codeBranchIcon"/></h5>
+                        <h5>Forks: {repo.forks} <FontAwesomeIcon icon="code-branch" className="codeBranchIcon"/></h5>
                     </div>
                 </div>
 
-                { this.state.repoDetailsShown[key] &&
+                { this.state.repoDetailsShown[repoKey] &&
                     <div>
                         <hr />
 
                         <div className="row repoStats">
                             <div className="col-sm-6">
-                                <h4>{element.created}</h4>
+                                <h4>{repo.created}</h4>
                                 <p>Created On</p>
                             </div>
                             <div className="col-sm-6">
-                                <h4>{element.pushed}</h4>
+                                <h4>{repo.pushed}</h4>
                                 <p>Last Updated On</p>
                             </div>
                         </div>
                         <div className="row repoStats">
                             <div className="col-sm-12">
-                                {this.generateLanguageBreakdownList(element)}
+                                {this.generateLanguageBreakdownList(repo)}
                             </div>
                         </div>
                     </div>
