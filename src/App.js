@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import Form from "./components/Form";
 import Profile from "./components/Profile";
@@ -8,7 +8,7 @@ class App extends Component {
         user: undefined,
         repos: undefined,
         error: undefined
-    }
+    };
 
     getUserData = async (e) => {
         e.preventDefault();
@@ -18,7 +18,14 @@ class App extends Component {
             const userBioData = await this.getUserBioInfo(username);
             if (userBioData.username) {
                 let userRepoData = await this.getUserRepoInfo(username);
-                // const userRepoLanguageStats = this.analyzeUserLanguages(userRepoData);
+
+                //Add user's language frequency map to user data
+                userBioData.userLanguageMap = this.analyzeUserLanguages(userRepoData);
+
+                //Get user's top two languages and add to user data
+                let userTopLanguages = this.getUserTopLanguages(userBioData.userLanguageMap);
+                userBioData.topLanguage = userTopLanguages[0];
+                userBioData.secondTopLanguage = userTopLanguages[1];
 
                 this.setState({
                     user: userBioData,
@@ -40,7 +47,7 @@ class App extends Component {
                 error: "Please enter username"
             });
         }
-    }
+    };
 
     getUserBioInfo = async (username) => {
         const api_call = await fetch(`https://api.github.com/users/${username}`);
@@ -66,7 +73,7 @@ class App extends Component {
                 error: data.message
             }
         }
-    }
+    };
 
     getUserRepoInfo = async (username) => {
         const api_call = await fetch(`https://api.github.com/users/${username}/repos`);
@@ -92,7 +99,7 @@ class App extends Component {
 
         this.analyzeRepoLanguages(repos);
         return repos;
-    }
+    };
 
     analyzeRepoLanguages = (userRepoData) => {
         userRepoData.forEach(async function(repo) {
@@ -117,10 +124,10 @@ class App extends Component {
         });
 
         return userRepoData;
-    }
+    };
 
     analyzeUserLanguages = (userRepoData) => {
-        var languageFrequencies = new Map();
+        let languageFrequencies = new Map();
 
         userRepoData.forEach(function(repo) {
             if (languageFrequencies.has(repo.language)) {
@@ -132,7 +139,24 @@ class App extends Component {
         });
 
         return languageFrequencies;
-    }
+    };
+
+    getUserTopLanguages = (languageMap) => {
+        let firstMostUsedLanguage = "", secondMostUsedLanguage = "";
+        let firstMostUsedFreq = 0, secondMostUsedFreq = 0;
+
+        languageMap.forEach(function (languageFreq, languageElement) {
+            if (languageFreq > firstMostUsedFreq && languageFreq > secondMostUsedFreq) {
+                firstMostUsedLanguage = languageElement;
+                firstMostUsedFreq = languageFreq;
+            } else if (languageFreq < firstMostUsedFreq && languageFreq > secondMostUsedFreq) {
+                secondMostUsedLanguage = languageElement;
+                secondMostUsedFreq = languageFreq;
+            }
+        });
+
+        return [firstMostUsedLanguage, secondMostUsedLanguage];
+    };
 
     render() {
         return (

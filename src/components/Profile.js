@@ -64,6 +64,19 @@ class Profile extends React.Component {
                     </div>
                 }
 
+                {this.props.user &&
+                <div className="row numericalData">
+                    <div className="col-sm-6">
+                        <h4>{this.props.user.topLanguage}</h4>
+                        <p className="caption">Most Used Language</p>
+                    </div>
+                    <div className="col-sm-6">
+                        <h4>{this.props.user.secondTopLanguage}</h4>
+                        <p className="caption">Second Most Used Language</p>
+                    </div>
+                </div>
+                }
+
                 { this.props.repos &&
                     <Repos repos={this.props.repos}/>
                 }

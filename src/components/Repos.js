@@ -1,14 +1,27 @@
 import React from "react";
 import '../css/Repos.css'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar, faEye, faCodeBranch } from '@fortawesome/free-solid-svg-icons'
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faCodeBranch, faEye, faStar} from '@fortawesome/free-solid-svg-icons'
 
 library.add(faStar);
 library.add(faEye);
 library.add(faCodeBranch);
 
 class Repos extends React.Component {
+
+    generateLanguageBreakdownList = (repo) => {
+        let languageItems = [];
+
+        languageItems.push(
+            <span key="languagelistDesc" className="list-inline-item languageListHeader">Languages: </span>
+        );
+        repo.language_breakdown.forEach(function (value, key) {
+            languageItems.push(<li key={key} className="list-inline-item languageListItem">{key + " " + value}</li>);
+        });
+
+        return <ul className="list-inline languageList">{languageItems}</ul>;
+    };
 
     constructor(props) {
         super(props);
@@ -20,22 +33,9 @@ class Repos extends React.Component {
 
         this.state = {
             repoDetailsShown: repoStates,
-        }
+        };
 
         this.toggleRepoDetails = this.toggleRepoDetails.bind(this);
-    }
-
-    generateLanguageBreakdownList = (repo) => {
-        let languageItems = [];
-
-        languageItems.push(
-            <span key="languagelistDesc" className="list-inline-item languageListHeader">Languages: </span>
-        );
-        repo.language_breakdown.forEach(function(value, key) {
-            languageItems.push(<li key={key} className="list-inline-item languageListItem">{key + " " + value}</li>);
-        });
-
-        return <ul className="list-inline languageList">{languageItems}</ul>;
     }
 
     toggleRepoDetails(repoKey) {
