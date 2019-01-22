@@ -1,7 +1,16 @@
 {
-  "main.css": "static/css/main.40a538e9.css",
-  "main.css.map": "static/css/main.40a538e9.css.map",
-  "main.js": "static/js/main.8bed6ad3.js",
-  "main.js.map": "static/js/main.8bed6ad3.js.map",
-  "static\\media\\bkg.png": "static/media/bkg.cd7a9a1d.png"
+  "main.css": "/gitbio/static/css/main.68c486f0.chunk.css",
+  "main.js": "/gitbio/static/js/main.326b2023.chunk.js",
+  "main.js.map": "/gitbio/static/js/main.326b2023.chunk.js.map",
+  "static/css/1.65d2d81d.chunk.css": "/gitbio/static/css/1.65d2d81d.chunk.css",
+  "static/js/1.e28ea3f8.chunk.js": "/gitbio/static/js/1.e28ea3f8.chunk.js",
+  "static/js/1.e28ea3f8.chunk.js.map": "/gitbio/static/js/1.e28ea3f8.chunk.js.map",
+  "runtime~main.js": "/gitbio/static/js/runtime~main.608a3a6b.js",
+  "runtime~main.js.map": "/gitbio/static/js/runtime~main.608a3a6b.js.map",
+  "static/css/1.65d2d81d.chunk.css.map": "/gitbio/static/css/1.65d2d81d.chunk.css.map",
+  "static/media/index.css": "/gitbio/static/media/bkg.cd7a9a1d.png",
+  "static/css/main.68c486f0.chunk.css.map": "/gitbio/static/css/main.68c486f0.chunk.css.map",
+  "index.html": "/gitbio/index.html",
+  "precache-manifest.c446aaf1afb9832cedb5ca662e0abd72.js": "/gitbio/precache-manifest.c446aaf1afb9832cedb5ca662e0abd72.js",
+  "service-worker.js": "/gitbio/service-worker.js"
 }
